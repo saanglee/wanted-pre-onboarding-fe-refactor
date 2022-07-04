@@ -1,18 +1,10 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AiOutlineSearch, AiOutlineHome, AiOutlineSend } from "react-icons/ai";
+import { useAuth } from "../../hooks/useAuth";
 
 const Header = () => {
-  const navigate = useNavigate();
-
-  const onLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("email");
-    localStorage.removeItem("password");
-
-    alert("로그아웃 되었습니다.");
-    navigate("/login");
-  };
+  const { logoutCallback } = useAuth();
 
   return (
     <header className="header">
@@ -41,7 +33,7 @@ const Header = () => {
                 <AiOutlineSend />
               </li>
               <li>
-                <button type="button" onClick={onLogout}>
+                <button type="button" onClick={logoutCallback}>
                   LOGOUT
                 </button>
               </li>
