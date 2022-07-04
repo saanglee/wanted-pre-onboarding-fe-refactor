@@ -1,14 +1,15 @@
-import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useRef } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 
 const LoginForm = () => {
-  const navigate = useNavigate();
+  const { loginCallback } = useAuth();
 
   const [inputs, setInputs] = useState({
-    user: "",
-    email: "",
-    password: "",
+    user: '',
+    email: '',
+    password: '',
   });
+
   const inputId = useRef();
   const inputEmail = useRef();
   const inputPw = useRef();
@@ -22,12 +23,12 @@ const LoginForm = () => {
   const { user, email, password } = inputs;
 
   //input change event
-  const onChangeHandler = (e) => {
+  const onChangeHandler = e => {
     const idCurrent = inputId.current.value;
     const emailCurrent = inputEmail.current.value;
     const pwCurrent = inputPw.current.value;
 
-    if (idCurrent !== "") {
+    if (idCurrent !== '') {
       setStatusId(true);
     } else {
       setStatusId(false);
@@ -49,7 +50,7 @@ const LoginForm = () => {
 
     //이메일 && 비밀번호 유효성 검사 - 버튼 disabled 여부
     if (
-      idCurrent !== "" &&
+      idCurrent !== '' &&
       validationEmail(emailCurrent) &&
       validationPassword(pwCurrent)
     ) {
@@ -66,28 +67,14 @@ const LoginForm = () => {
     });
   };
 
-  //form 전송
-  const onSubmitHandler = (e) => {
+  // TODO: login 처리 로직 분리
+  const onSubmitHandler = e => {
     e.preventDefault();
-
-    if (
-      localStorage.getItem("email") === email &&
-      localStorage.getItem("password") === password
-    ) {
-      alert("등록된 이메일, 패스워드와 일치합니다.");
-    } else {
-      //로컬스토리지에 저장
-      localStorage.setItem("user", user);
-      localStorage.setItem("email", email);
-      localStorage.setItem("password", password);
-      alert("로그인 되었습니다.");
-      navigate("/");
-    }
+    loginCallback(inputs);
   };
 
-  //이메일 유효성 검사 함수
   function validationEmail(v) {
-    if (v === "") {
+    if (v === '') {
       return false;
     }
     const emailRegex =
@@ -101,7 +88,7 @@ const LoginForm = () => {
 
   //비밀번호 유효성 검사 함수
   function validationPassword(v) {
-    if (v === "") {
+    if (v === '') {
       return false;
     }
     const pwRegex =
@@ -123,7 +110,7 @@ const LoginForm = () => {
         ref={inputId}
         onChange={onChangeHandler}
         placeholder="닉네임"
-        className={(statusId ? "" : "error") + " w100"}
+        className={(statusId ? '' : 'error') + ' w100'}
       />
       <input
         type="text"
@@ -131,7 +118,7 @@ const LoginForm = () => {
         ref={inputEmail}
         onChange={onChangeHandler}
         placeholder="이메일"
-        className={(statusEmail ? "" : "error") + " w100"}
+        className={(statusEmail ? '' : 'error') + ' w100'}
       />
       <input
         type="password"
@@ -139,12 +126,12 @@ const LoginForm = () => {
         ref={inputPw}
         onChange={onChangeHandler}
         placeholder="비밀번호"
-        className={(statusPw ? "" : "error") + " w100"}
+        className={(statusPw ? '' : 'error') + ' w100'}
       />
       <button
         type="submit"
         className="btn btn-point w100"
-        disabled={statusBtn ? "" : "disabled"}
+        disabled={statusBtn ? '' : 'disabled'}
       >
         로그인
       </button>
