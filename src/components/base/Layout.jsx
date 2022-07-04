@@ -1,0 +1,11 @@
+import React from "react";
+
+const Layout = ({ children }) => {
+  return (
+    <div className="container">
+      <div className="inner">{children}</div>
+    </div>
+  );
+};
+
+export default Layout;

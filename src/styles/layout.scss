@@ -1,0 +1,311 @@
+@import "./variable";
+@import "./mixin";
+@import "./common.scss";
+
+// layout
+.container {
+  background: $color-gray;
+}
+.inner {
+  width: 975px;
+  margin: 0 auto;
+}
+
+// header ------- start
+.header {
+  position: sticky;
+  top: 0;
+  padding: 1rem 0;
+  background-color: $color-white;
+  h1 {
+    width: 7rem;
+  }
+  .header-utils {
+    @include flexBetweenCenter;
+
+    .header-search {
+      position: relative;
+      input {
+        width: 16rem;
+        padding-left: 2.4rem;
+      }
+      svg {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        font-size: 1.1rem;
+        color: $color-gray2;
+      }
+    }
+    .gnb {
+      ul {
+        @include flexEnd;
+        li {
+          margin-right: 1.8rem;
+          &:last-child {
+            margin-right: 0;
+          }
+          svg {
+            font-size: 1.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+//header ---------- end
+
+// login ---------- start 반응형 X
+.login {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $color-gray;
+  .login-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.login-form {
+  width: 350px;
+  padding: 40px 40px 20px;
+  background: $color-white;
+  border: 1px solid $color-grayline;
+  h2 {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.8rem;
+    color: $color-point;
+    img {
+      width: 175px;
+      height: 51px;
+    }
+  }
+  input {
+    margin-bottom: 0.3rem;
+  }
+  button {
+    margin-top: 0.8rem;
+    cursor: pointer;
+  }
+  .login-hr {
+    @include flexBetweenCenter;
+    margin: 20px 0 30px;
+    & > span:first-child,
+    & > span:last-child {
+      display: inline-block;
+      width: 40%;
+      height: 1px;
+      background-color: $color-grayline;
+    }
+    & > span:nth-child(2) {
+      color: $color-gray2;
+      font-size: 13px;
+    }
+  }
+
+  .login-facebook {
+    @include flexCenter;
+    svg {
+      font-size: 20px;
+      color: $color-facebook;
+    }
+    a {
+      margin-left: 5px;
+      color: $color-facebook;
+      font-weight: 500;
+    }
+  }
+
+  & > a {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    color: $color-navy;
+    font-size: 12px;
+  }
+}
+
+.login-account {
+  @include flexCenter;
+  margin-top: 10px;
+  width: 350px;
+  height: 63px;
+  background: $color-white;
+  border: 1px solid $color-grayline;
+  span {
+    font-size: 13px;
+  }
+  a {
+    margin-left: 5px;
+    color: $color-point;
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+
+.login-download {
+  p {
+    margin: 20px 0;
+    text-align: center;
+  }
+  .apps {
+    @include flexCenter;
+    a {
+      display: inline-block;
+      width: 136px;
+      img {
+        width: 100%;
+      }
+      &:first-child {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+// login ------------ end
+
+// main / feed ---------- start
+.main {
+  padding: 1rem 15rem 5rem;
+  background-color: $color-gray;
+  min-height: 90vh;
+  .feed {
+    width: 470px;
+    margin: 0 auto;
+    .loading {
+      padding-top: 2rem;
+      text-align: center;
+      svg {
+        font-size: 1.8rem;
+      }
+    }
+  }
+  .feed-item {
+    display: none;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    background-color: $color-white;
+    border: 1px solid $color-grayline;
+    border-radius: 0.5rem;
+    &.on {
+      display: block;
+    }
+  }
+  .feed-info {
+    @include flexBetweenCenter;
+    padding: 0.8rem 1rem;
+    .user {
+      @include flexCenter;
+      span {
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background-color: $color-graybg2;
+      }
+      strong {
+        margin-left: 1rem;
+        font-size: 0.8rem;
+      }
+    }
+    svg {
+      font-size: 1.5rem;
+    }
+  }
+
+  .feed-img {
+    img {
+      width: 100%;
+    }
+  }
+
+  .feed-utils {
+    padding: 1.5rem 1rem;
+    .feed-menu {
+      @include flexBetweenCenter;
+      ul {
+        @include flexCenter;
+        li {
+          margin-right: 0.8rem;
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+      svg {
+        font-size: 1.5rem;
+      }
+    }
+
+    .feed-content {
+      margin-top: 0.5rem;
+      & > strong {
+        display: block;
+        font-size: 0.8rem;
+      }
+      p {
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    .feed-comment_list {
+      margin-top: 1rem;
+
+      ul {
+        margin-top: 1rem;
+        li {
+          margin-bottom: 0.5rem;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          p {
+            line-height: 1.2;
+            font-size: 0.8rem;
+          }
+          strong {
+            margin-right: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+
+  .feed-comment_input {
+    @include flexBetweenCenter;
+    border-top: 1px solid $color-grayline;
+    .input {
+      flex: 1;
+      position: relative;
+      svg {
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+      }
+    }
+    input {
+      height: 2.8rem;
+      border: none;
+      background-color: $color-white;
+      padding-left: 3.4rem;
+    }
+    button {
+      padding: 0 1.2rem;
+      color: $color-point;
+      font-weight: 500;
+    }
+  }
+}
+// main -------- end
+
+@import "./responsive.scss";

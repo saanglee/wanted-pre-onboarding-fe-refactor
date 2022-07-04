@@ -1,0 +1,42 @@
+{
+  "feeds": [
+    {
+      "user_id": "wanted",
+      "img": "https://source.unsplash.com/random/400x400",
+      "like": 23,
+      "content": "원티드 프리온보딩 프론트엔드 개발",
+      "comments": [
+        {
+          "user": "soob__zz",
+          "content": "공부도 하고 취업도 하고 싶어요"
+        }
+      ]
+    },
+    {
+      "user_id": "soob",
+      "img": "https://source.unsplash.com/random/500x600",
+      "like": 20,
+      "comments": [
+        {
+          "user": "wjdalghk",
+          "content": "너무 멋진 곳이다!"
+        },
+        {
+          "user": "dkssud",
+          "content": "사진 잘 찍었네요"
+        }
+      ]
+    },
+    {
+      "user_id": "random_img",
+      "img": "https://source.unsplash.com/random/600x400",
+      "like": 100,
+      "comments": [
+        {
+          "user": "waiting",
+          "content": "어떤 사진이 나올까?"
+        }
+      ]
+    }
+  ]
+}
