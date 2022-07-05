@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import {
   AiOutlineEllipsis,
   AiOutlineHeart,
@@ -7,7 +7,8 @@ import {
   AiOutlineSend,
   AiOutlinePushpin,
   AiOutlineSmile,
-} from "react-icons/ai";
+} from 'react-icons/ai';
+import LazyImg from './LazyImg';
 
 const Feed = ({ feed }) => {
   //이미지 로딩 상태
@@ -26,20 +27,20 @@ const Feed = ({ feed }) => {
   };
 
   //댓글 입력 이벤트
-  const onChangeComment = (e) => {
+  const onChangeComment = e => {
     const { value } = e.target;
 
     setComment(value);
   };
 
   //댓글 게시 버튼 클릭 이벤트
-  const onPostClickHandler = (e) => {
+  const onPostClickHandler = e => {
     setCommentFunc();
   };
 
   //엔터키 입력 이벤트
-  const onPostPressHandler = (e) => {
-    if (e.key === "Enter" && e.nativeEvent.isComposing === false) {
+  const onPostPressHandler = e => {
+    if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
       setCommentFunc();
     }
   };
@@ -50,92 +51,92 @@ const Feed = ({ feed }) => {
     setComments([
       ...comments,
       {
-        user: localStorage.getItem("user"),
+        user: localStorage.getItem('user'),
         content: comment,
       },
     ]);
 
     //input 초기화
-    inputComment.current.value = "";
+    inputComment.current.value = '';
   }
 
   return (
-    <div className={"feed-item " + (loaded && "on")}>
-      {loaded && (
-        <div className="feed-info">
-          <div className="user">
-            <span></span>
-            <strong>{feed.user_id}</strong>
-          </div>
-          <AiOutlineEllipsis />
+    <div className={'feed-item ' + (loaded && 'on')}>
+      <div className="feed-info">
+        <div className="user">
+          <span></span>
+          <strong>{feed.user_id}</strong>
         </div>
-      )}
-
-      <div className="feed-img">
-        <img src={feed.img} alt="" onLoad={onLoaded} />
+        <AiOutlineEllipsis />
       </div>
 
-      {loaded && (
-        <>
-          <div className="feed-utils">
-            <div className="feed-menu">
-              <ul>
-                <li>
-                  <button type="button">
-                    <AiOutlineHeart />
-                  </button>
-                </li>
-                <li>
-                  <Link to="/">
-                    <AiOutlineMessage />
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/">
-                    <AiOutlineSend />
-                  </Link>
-                </li>
-              </ul>
-              <button type="button">
-                <AiOutlinePushpin />
-              </button>
-            </div>
-            <div className="feed-content">
-              <strong>좋아요 {feed.like}개</strong>
+      <div className="feed-img">
+        <LazyImg
+          src={feed.img}
+          alt="피드 이미지"
+          onLoaed={onLoaded}
+        />
+      </div>
 
-              <p>{feed.content}</p>
-            </div>
-            {/* 댓글 */}
-            <div className="feed-comment_list">
-              <ul>
-                {comments.map((v, idx) => (
-                  <li key={idx}>
-                    <p>
-                      <strong>{v.user}</strong>
-                      {v.content}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div className="feed-comment_input">
-            <div className="input">
-              <AiOutlineSmile />
-              <input
-                type="text"
-                className="w100"
-                ref={inputComment}
-                onChange={onChangeComment}
-                onKeyDown={onPostPressHandler}
-              />
-            </div>
-            <button type="button" onClick={onPostClickHandler}>
-              게시
+      <>
+        <div className="feed-utils">
+          <div className="feed-menu">
+            <ul>
+              <li>
+                <button type="button">
+                  <AiOutlineHeart />
+                </button>
+              </li>
+              <li>
+                <Link to="/">
+                  <AiOutlineMessage />
+                </Link>
+              </li>
+              <li>
+                <Link to="/">
+                  <AiOutlineSend />
+                </Link>
+              </li>
+            </ul>
+            <button type="button">
+              <AiOutlinePushpin />
             </button>
           </div>
-        </>
-      )}
+          <div className="feed-content">
+            <strong>좋아요 {feed.like}개</strong>
+
+            <p>{feed.content}</p>
+          </div>
+          {/* 댓글 */}
+          <div className="feed-comment_list">
+            <ul>
+              {comments.map((v, idx) => (
+                <li key={idx}>
+                  <p>
+                    <strong>{v.user}</strong>
+                    {v.content}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="feed-comment_input">
+          <div className="input">
+            <AiOutlineSmile />
+            <input
+              type="text"
+              className="w100"
+              ref={inputComment}
+              onChange={onChangeComment}
+              onKeyDown={onPostPressHandler}
+            />
+          </div>
+          <button type="button" onClick={onPostClickHandler}>
+            게시
+          </button>
+        </div>
+      </>
     </div>
   );
 };
