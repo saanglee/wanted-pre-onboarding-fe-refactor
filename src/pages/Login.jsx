@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useUserState } from '../store/auth/provider';
-import Layout from '../components/base/Layout';
+import Layout from '../layout';
 import LoginForm from '../components/member/LoginForm';
 import { FaFacebookSquare } from 'react-icons/fa';
 
