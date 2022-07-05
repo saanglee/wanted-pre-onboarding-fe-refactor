@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Layout from "../components/base/Layout";
-import Feeds from "../components/feed/Feeds";
-import Axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+import { useUserState } from '../store/auth/provider';
+import Layout from '../components/base/Layout';
+import Feeds from '../components/feed/Feeds';
+import Axios from 'axios';
 
 const Home = () => {
-  const navigate = useNavigate();
+  const { token } = useUserState();
   const [feeds, setFeeds] = useState();
   const path = `${process.env.PUBLIC_URL}/data/feedData.json`;
 
   useEffect(() => {
-    if (!localStorage.getItem("email")) {
-      alert("로그인 해주세요.");
-      navigate("/login");
-    }
-
     const fetchData = async () => {
       try {
         const result = await Axios(path);
@@ -27,12 +23,16 @@ const Home = () => {
     fetchData();
   }, []);
 
+  // TODO: Routes 폴더에서 라우팅 처리해주기
   return (
-    <Layout>
-      <div className="main">
-        <Feeds data={feeds} />
-      </div>
-    </Layout>
+    <>
+      {!token && <Navigate to="/login" replace={true} />}
+      <Layout>
+        <div className="main">
+          <Feeds data={feeds} />
+        </div>
+      </Layout>
+    </>
   );
 };
 
