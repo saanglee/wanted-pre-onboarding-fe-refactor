@@ -28,9 +28,9 @@ const Home = () => {
     <>
       {!token && <Navigate to="/login" replace={true} />}
       <Layout>
-        <div className="main">
+        <main>
           <Feeds data={feeds} />
-        </div>
+        </main>
       </Layout>
     </>
   );

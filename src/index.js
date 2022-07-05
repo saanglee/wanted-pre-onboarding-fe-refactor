@@ -15,9 +15,7 @@ root.render(
       <GlobalStyles />
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-          {/* 홈 */}
           <Route path="/" element={<App />} />
-          {/* 로그인 */}
           <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>

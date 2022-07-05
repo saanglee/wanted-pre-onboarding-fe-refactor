@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useUserDispatch } from '../store/auth/provider';
-import { checkIsVerifyAccount } from '../util/checkIsVerifyAccount';
+import { checkAccount } from '../util/checkAccount';
 
 /**
  * useAuth
@@ -22,7 +22,7 @@ export function useAuth() {
 const getLoginCallback =
   (navigate, dispatch) => async inputValues => {
     const { user, email, password } = inputValues;
-    const isUserExist = checkIsVerifyAccount({ email, password });
+    const isUserExist = checkAccount({ email, password });
 
     if (!isUserExist) {
       alert('아이디 또는 비밀번호를 잘못 입력하셨습니다!');
