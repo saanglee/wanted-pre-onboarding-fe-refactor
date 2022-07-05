@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   AiOutlineEllipsis,
@@ -9,6 +9,7 @@ import {
 } from 'react-icons/ai';
 import CommentWrite from './comment/CommentWrite';
 import CommentList from './comment/CommentList';
+import LazyImg from './LazyImg';
 
 const Feed = ({ feed }) => {
   // 이미지 로딩 상태
@@ -32,39 +33,43 @@ const Feed = ({ feed }) => {
           </div>
           <AiOutlineEllipsis />
         </div>
-      )}
-
-      <div className="feed-img">
-        <img src={feed.img} alt="" onLoad={onLoaded} />
+        <AiOutlineEllipsis />
       </div>
 
-      {loaded && (
-        <>
-          <div className="feed-utils">
-            <div className="feed-menu">
-              <ul>
-                <li>
-                  <button type="button">
-                    <AiOutlineHeart />
-                  </button>
-                </li>
-                <li>
-                  <Link to="/">
-                    <AiOutlineMessage />
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/">
-                    <AiOutlineSend />
-                  </Link>
-                </li>
-              </ul>
-              <button type="button">
-                <AiOutlinePushpin />
-              </button>
-            </div>
-            <div className="feed-content">
-              <strong>좋아요 {feed.like}개</strong>
+      <div className="feed-img">
+        <LazyImg
+          src={feed.img}
+          alt="피드 이미지"
+          onLoaed={onLoaded}
+        />
+      </div>
+
+      <>
+        <div className="feed-utils">
+          <div className="feed-menu">
+            <ul>
+              <li>
+                <button type="button">
+                  <AiOutlineHeart />
+                </button>
+              </li>
+              <li>
+                <Link to="/">
+                  <AiOutlineMessage />
+                </Link>
+              </li>
+              <li>
+                <Link to="/">
+                  <AiOutlineSend />
+                </Link>
+              </li>
+            </ul>
+            <button type="button">
+              <AiOutlinePushpin />
+            </button>
+          </div>
+          <div className="feed-content">
+            <strong>좋아요 {feed.like}개</strong>
 
               <p>{feed.content}</p>
             </div>
@@ -77,6 +82,7 @@ const Feed = ({ feed }) => {
           />
         </>
       )}
+            
     </div>
   );
 };
