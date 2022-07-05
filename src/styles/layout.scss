@@ -1,6 +1,6 @@
-@import "./variable";
-@import "./mixin";
-@import "./common.scss";
+@import './variable';
+@import './mixin';
+@import './common.scss';
 
 // layout
 .container {
@@ -15,6 +15,7 @@
 .header {
   position: sticky;
   top: 0;
+  z-index: 10;
   padding: 1rem 0;
   background-color: $color-white;
   h1 {
@@ -308,4 +309,4 @@
 }
 // main -------- end
 
-@import "./responsive.scss";
+@import './responsive.scss';
