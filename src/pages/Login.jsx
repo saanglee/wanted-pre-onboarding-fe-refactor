@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useUserState } from '../store/auth/provider';
 import Layout from '../layout';
 import LoginForm from '../components/member/LoginForm';
 import { FaFacebookSquare } from 'react-icons/fa';
-import SignUpMoal from './SignUpModal';
 
 const Login = () => {
   const { token } = useUserState();
-  const [showModal, setShowModal] = useState(false);
 
+  // TODO: Routes 폴더에서 라우팅 처리해주기
   return (
     <>
       {token && <Navigate to="/" replace={true} />}
@@ -37,10 +36,7 @@ const Login = () => {
             </div>
             <div className="login-account">
               <span>계정이 없으신가요?</span>
-              {/* <Link to="/">가입하기</Link> */}
-              <button onClick={() => setShowModal(true)}>
-                가입하기
-              </button>
+              <Link to="/">가입하기</Link>
             </div>
             <div className="login-download">
               <p>앱을 다운로드 하세요.</p>
@@ -60,9 +56,6 @@ const Login = () => {
           </div>
         </div>
       </Layout>
-      {showModal && (
-        <SignUpMoal isModal={showModal} setShowModal={setShowModal} />
-      )}
     </>
   );
 };
