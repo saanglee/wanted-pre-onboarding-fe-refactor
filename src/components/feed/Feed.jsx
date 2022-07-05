@@ -25,13 +25,10 @@ const Feed = ({ feed }) => {
 
   return (
     <div className={'feed-item ' + (loaded && 'on')}>
-      {loaded && (
-        <div className="feed-info">
-          <div className="user">
-            <span></span>
-            <strong>{feed.user_id}</strong>
-          </div>
-          <AiOutlineEllipsis />
+      <div className="feed-info">
+        <div className="user">
+          <span></span>
+          <strong>{feed.user_id}</strong>
         </div>
         <AiOutlineEllipsis />
       </div>
@@ -71,18 +68,13 @@ const Feed = ({ feed }) => {
           <div className="feed-content">
             <strong>좋아요 {feed.like}개</strong>
 
-              <p>{feed.content}</p>
-            </div>
-            {/* 댓글 */}
-            <CommentList comments={comments} />
+            <p>{feed.content}</p>
           </div>
-          <CommentWrite
-            setComments={setComments}
-            comments={comments}
-          />
-        </>
-      )}
-            
+          {/* 댓글 */}
+          <CommentList comments={comments} />
+        </div>
+        <CommentWrite setComments={setComments} comments={comments} />
+      </>
     </div>
   );
 };
