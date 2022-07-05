@@ -8,7 +8,8 @@
       "comments": [
         {
           "user": "soob__zz",
-          "content": "공부도 하고 취업도 하고 싶어요"
+          "content": "공부도 하고 취업도 하고 싶어요",
+          "commentId": 0
         }
       ]
     },
@@ -19,11 +20,8 @@
       "comments": [
         {
           "user": "wjdalghk",
-          "content": "너무 멋진 곳이다!"
-        },
-        {
-          "user": "dkssud",
-          "content": "사진 잘 찍었네요"
+          "content": "너무 멋진 곳이다!",
+          "commentId": 0
         }
       ]
     },
@@ -34,7 +32,8 @@
       "comments": [
         {
           "user": "waiting",
-          "content": "어떤 사진이 나올까?"
+          "content": "어떤 사진이 나올까?",
+          "commentId": 0
         }
       ]
     }
