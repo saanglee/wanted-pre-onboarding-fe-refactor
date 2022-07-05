@@ -23,7 +23,6 @@ const Home = () => {
     fetchData();
   }, []);
 
-  // TODO: Routes 폴더에서 라우팅 처리해주기
   return (
     <>
       {!token && <Navigate to="/login" replace={true} />}

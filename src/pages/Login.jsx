@@ -8,7 +8,6 @@ import { FaFacebookSquare } from 'react-icons/fa';
 const Login = () => {
   const { token } = useUserState();
 
-  // TODO: Routes 폴더에서 라우팅 처리해주기
   return (
     <>
       {token && <Navigate to="/" replace={true} />}
