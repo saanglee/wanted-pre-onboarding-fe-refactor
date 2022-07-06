@@ -2,14 +2,14 @@ import { AiOutlineSmile } from 'react-icons/ai';
 import React, { useRef, useState } from 'react';
 
 const CommentWrite = props => {
-  const [comments, setComments] = useState();
+  const [comment, setComment] = useState();
   const [commentId, setCommentId] = useState(1);
 
   const inputComment = useRef();
 
   const onChangeComment = e => {
     const { value } = e.target;
-    setComments(value);
+    setComment(value);
   };
 
   const createComment = () => {
@@ -17,7 +17,7 @@ const CommentWrite = props => {
       ...props.comments,
       {
         user: localStorage.getItem('user'),
-        content: comments,
+        content: comment,
         commentId: commentId,
       },
     ]);

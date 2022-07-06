@@ -40,6 +40,19 @@ input {
   }
 }
 
+.like-btn {
+  color: rgb(190, 50, 50);
+  :hover {
+    color: rgb(194, 94, 94);
+  }
+}
+.unLike-btn {
+  color: #000;
+  :hover {
+    color: #999;
+  }
+}
+
 img {
   max-width: 100%;
 }
