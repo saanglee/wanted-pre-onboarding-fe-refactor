@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Feed from './Feed';
 
-const Feeds = props => {
+const Feeds = (props) => {
   const [feedData, setFeedData] = useState(props.data);
 
   useEffect(() => {
@@ -18,20 +18,19 @@ const Feeds = props => {
     setFeedData(feedData.filter(d => d.id !== id));
   };
 
-
-const Feeds = (props) => {
+  const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
   return (
     <>
       {feedData !== undefined &&
-        feedData.map((feed, idx) => (
+        shuffle(feedData.map((feed, idx) => (
           <Feed
             key={idx}
             feed={feed}
             id={feed.id}
             onRemove={removeHandler}
           />
-        ))}
+        )))}
     </>
   );
 };
