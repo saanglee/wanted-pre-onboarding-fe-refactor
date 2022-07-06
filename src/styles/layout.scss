@@ -265,6 +265,9 @@
         margin-top: 1rem;
         li {
           margin-bottom: 0.5rem;
+          display: flex;
+          justify-content: space-between;
+
           &:last-child {
             margin-bottom: 0;
           }
@@ -274,6 +277,14 @@
           }
           strong {
             margin-right: 0.8rem;
+          }
+          button {
+            color: rgb(197, 195, 195);
+            margin-right: 20px;
+            font-size: 1rem;
+          }
+          :hover {
+            color: black;
           }
         }
       }
