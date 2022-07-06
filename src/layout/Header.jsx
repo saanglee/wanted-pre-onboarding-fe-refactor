@@ -7,11 +7,36 @@ import {
   AiOutlineSend,
 } from 'react-icons/ai';
 import AuthBtn from './AuthBtn';
+import { useThrottle } from '../hooks/useThrottle';
 
 const Header = () => {
   const { user } = useUserState();
+  const throttleScroll = useThrottle(handleScroll, 150);
+
+  // scrolls
+  const [hide, setHide] = React.useState(false);
+  const [pageY, setPageY] = React.useState(0);
+  // console.log(pageY);
+
+  const documentRef = React.useRef(document);
+
+  function handleScroll(event) {
+    event.stopPropagation();
+    const { pageYOffset } = window;
+    const deltaY = pageYOffset - pageY;
+    const hide = pageYOffset !== 0 && deltaY >= 0;
+    setHide(hide);
+    setPageY(pageYOffset);
+  }
+
+  React.useEffect(() => {
+    documentRef.current.addEventListener('scroll', throttleScroll);
+    return () =>
+      documentRef.current.removeEventListener('scroll', throttleScroll);
+  }, [pageY]);
+  
   return (
-    <header className="header">
+    <header className={hide ? 'hide header' : 'header'}>
       <div className="inner">
         <div className="header-utils">
           <h1>
