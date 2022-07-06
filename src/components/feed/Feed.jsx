@@ -13,7 +13,6 @@ import CommentList from './comment/CommentList';
 import LazyImg from './LazyImg';
 import Portal from '../Portal';
 
-
 const Feed = ({ feed, id, onRemove }) => {
   const [loaded, setLoaded] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -25,19 +24,17 @@ const Feed = ({ feed, id, onRemove }) => {
     setLoaded(true);
   };
 
-
   const onClickLike = () => {
     setIsLike(prev => !prev);
     if (isLike) setLike(prev => prev - 1);
     if (!isLike) setLike(prev => prev + 1);
-
+  };
   const openClickHandler = e => {
     setOpenModal(true);
   };
 
   const closeClickHandler = e => {
     setOpenModal(false);
-
   };
 
   return (
