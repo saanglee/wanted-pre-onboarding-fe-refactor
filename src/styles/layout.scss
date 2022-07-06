@@ -217,8 +217,10 @@
         font-size: 0.8rem;
       }
     }
-    svg {
-      font-size: 1.5rem;
+    button {
+      svg {
+        font-size: 1.5rem;
+      }
     }
   }
 
@@ -308,5 +310,41 @@
   }
 }
 // main -------- end
+
+// modal
+.modal {
+  &-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 11;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  &-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    min-width: 20rem;
+  }
+  &-list {
+    border-radius: 1.3rem;
+    li {
+      text-align: center;
+      border-bottom: 1px solid $color-grayline;
+      &:last-child {
+        border-bottom: none;
+      }
+      button {
+        padding: 1.1rem 0;
+        width: 100%;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
 
 @import './responsive.scss';
