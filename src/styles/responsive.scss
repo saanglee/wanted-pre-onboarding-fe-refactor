@@ -31,6 +31,9 @@
             svg {
               font-size: 1.5rem;
             }
+            &.user {
+              display: none;
+            }
           }
         }
       }
@@ -41,6 +44,14 @@
     padding: 1rem 0;
     .feed {
       width: 100%;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    &-body {
+      min-width: 90%;
     }
   }
 }

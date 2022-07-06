@@ -1,8 +1,13 @@
 import React from 'react';
-import Home from './pages/Home';
+import { UserProvider } from './store/auth/provider';
+import Routes from './routes';
 
 function App() {
-  return <Home />;
+  return (
+    <UserProvider>
+      <Routes />
+    </UserProvider>
+  );
 }
 
 export default App;

@@ -1,12 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { UserProvider } from './store/auth/provider';
 import ReactDOM from 'react-dom/client';
 import GlobalStyles from './styles/globalStyles';
 import './styles/layout.scss';
 
 import App from './App';
-import Login from './pages/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,10 +13,7 @@ root.render(
     <UserProvider>
       <GlobalStyles />
       <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+        <App />
       </BrowserRouter>
     </UserProvider>
   </React.StrictMode>,

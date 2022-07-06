@@ -3,36 +3,39 @@ import React, { useRef, useState } from 'react';
 
 const CommentWrite = props => {
   const [comment, setComment] = useState();
+  const [commentId, setCommentId] = useState(1);
 
   const inputComment = useRef();
 
   const onChangeComment = e => {
     const { value } = e.target;
-
     setComment(value);
   };
 
-  const onPostPressHandler = e => {
-    if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
-      setCommentFunc();
-    }
-  };
-
-  const onPostClickHandler = e => {
-    setCommentFunc();
-  };
-
-  function setCommentFunc() {
+  const createComment = () => {
     props.setComments([
       ...props.comments,
       {
         user: localStorage.getItem('user'),
         content: comment,
+        commentId: commentId,
       },
     ]);
 
+    setCommentId(prev => prev + 1);
+
     inputComment.current.value = '';
-  }
+  };
+
+  const onPostPressHandler = e => {
+    if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
+      createComment();
+    }
+  };
+
+  const onPostClickHandler = () => {
+    createComment();
+  };
 
   return (
     <div>

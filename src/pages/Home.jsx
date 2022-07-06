@@ -4,34 +4,33 @@ import { useUserState } from '../store/auth/provider';
 import Layout from '../layout';
 import Feeds from '../components/feed/Feeds';
 import Axios from 'axios';
+import PullToRefresh from 'react-simple-pull-to-refresh';
 
 const Home = () => {
-  const { token } = useUserState();
   const [feeds, setFeeds] = useState();
   const path = `${process.env.PUBLIC_URL}/data/feedData.json`;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await Axios(path);
-        setFeeds(result.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      const result = await Axios(path);
+      setFeeds(result.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
 
   return (
-    <>
-      {!token && <Navigate to="/login" replace={true} />}
-      <Layout>
-        <main>
+    <Layout>
+      <div className="main">
+        <PullToRefresh onRefresh={() => fetchData()}>
           <Feeds data={feeds} />
-        </main>
-      </Layout>
-    </>
+        </PullToRefresh>
+      </div>
+    </Layout>
   );
 };
 

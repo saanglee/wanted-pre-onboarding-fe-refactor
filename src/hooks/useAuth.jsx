@@ -1,5 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { useUserDispatch } from '../store/auth/provider';
+import {
+  useUserDispatch,
+  useUserState,
+} from '../store/auth/provider';
 import { checkAccount } from '../util/checkAccount';
 
 /**
@@ -11,21 +14,37 @@ import { checkAccount } from '../util/checkAccount';
  */
 export function useAuth() {
   const navigate = useNavigate();
+  const { userList } = useUserState();
   const dispatch = useUserDispatch();
 
-  const loginCallback = getLoginCallback(navigate, dispatch);
+  const signUpCallback = getSignUpCallback(dispatch);
+  const loginCallback = getLoginCallback(
+    navigate,
+    userList,
+    dispatch,
+    signUpCallback,
+  );
   const logoutCallback = getLogoutCallback(navigate, dispatch);
 
   return { loginCallback, logoutCallback };
 }
 
 const getLoginCallback =
-  (navigate, dispatch) => async inputValues => {
+  (navigate, userList, dispatch, signUpCallback) =>
+  async inputValues => {
     const { user, email, password } = inputValues;
-    const isUserExist = checkAccount({ email, password });
+    const { isUserExist, isUserValid } = checkAccount(
+      { email, password },
+      userList,
+    );
 
-    if (!isUserExist) {
-      alert('아이디 또는 비밀번호를 잘못 입력하셨습니다!');
+    if (isUserExist && !isUserValid) {
+      alert('비밀번호가 잘못되었습니다! 확인해주세요!');
+      return;
+    }
+
+    if (!(isUserExist && isUserValid)) {
+      signUpCallback({ email, password });
       return;
     }
 
@@ -45,4 +64,15 @@ const getLogoutCallback = (navigate, dispatch) => async () => {
   });
 
   navigate('/login', { replace: true });
+};
+
+const getSignUpCallback = dispatch => async user => {
+  alert('존재하지 않는 유저입니다. 회원가입 처리 하겠습니다');
+
+  dispatch({
+    type: 'SIGNUP',
+    user,
+  });
+
+  alert('회원가입 완료했습니다! 로그인 해주세요!');
 };
