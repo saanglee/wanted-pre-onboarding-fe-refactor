@@ -1,9 +1,13 @@
 import React from 'react';
-import Home from './pages/Home';
+import { UserProvider } from './store/auth/provider';
+import Routes from './routes';
 
-// TODO: Route 파일을 만든 후 App에서 해당 라우트를 렌더링
 function App() {
-  return <Home />;
+  return (
+    <UserProvider>
+      <Routes />
+    </UserProvider>
+  );
 }
 
 export default App;

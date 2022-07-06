@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   AiOutlineEllipsis,
@@ -82,7 +82,11 @@ const Feed = ({ feed, id, onRemove }) => {
             <p>{feed.content}</p>
           </div>
           {/* 댓글 */}
-          <CommentList comments={comments} />
+          <CommentList
+            comments={comments}
+            setComments={setComments}
+            feed={feed}
+          />
         </div>
         <CommentWrite setComments={setComments} comments={comments} />
       </>

@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useUserState } from '../store/auth/provider';
 import {
   AiOutlineSearch,
   AiOutlineHome,
   AiOutlineSend,
 } from 'react-icons/ai';
-import { useAuth } from '../hooks/useAuth';
+import AuthBtn from './AuthBtn';
 
 const Header = () => {
-  const { logoutCallback } = useAuth();
-
+  const { user } = useUserState();
   return (
     <header className="header">
       <div className="inner">
@@ -32,6 +32,7 @@ const Header = () => {
           </div>
           <nav className="gnb">
             <ul>
+              <li>{user && <span>{user}님 안녕하세요!</span>}</li>
               <li>
                 <Link to="/">
                   <AiOutlineHome />
@@ -41,9 +42,7 @@ const Header = () => {
                 <AiOutlineSend />
               </li>
               <li>
-                <button type="button" onClick={logoutCallback}>
-                  LOGOUT
-                </button>
+                <AuthBtn />
               </li>
             </ul>
           </nav>

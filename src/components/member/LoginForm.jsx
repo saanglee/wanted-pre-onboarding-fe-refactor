@@ -67,7 +67,6 @@ const LoginForm = () => {
     });
   };
 
-  // TODO: login 처리 로직 분리
   const onSubmitHandler = e => {
     e.preventDefault();
     loginCallback(inputs);
