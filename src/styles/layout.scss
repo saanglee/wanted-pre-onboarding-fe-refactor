@@ -18,6 +18,11 @@
   z-index: 10;
   padding: 1rem 0;
   background-color: $color-white;
+  transition: 0.4s ease;
+  &.hide {
+    transform: translateY(-80px);
+    visibility: hidden;
+  }
   h1 {
     width: 7rem;
   }

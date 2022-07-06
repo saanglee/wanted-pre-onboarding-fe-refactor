@@ -18,6 +18,9 @@ const Feeds = props => {
     setFeedData(feedData.filter(d => d.id !== id));
   };
 
+
+const Feeds = (props) => {
+
   return (
     <>
       {feedData !== undefined &&
