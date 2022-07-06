@@ -1,6 +1,8 @@
 const initialState = {
   token: JSON.parse(localStorage.getItem('authToken')),
   user: localStorage.getItem('user'),
+  userList:
+    JSON.parse(localStorage.getItem('registeredUserList')) || [],
 };
 
 const authReducer = (state, { type, user }) => {
@@ -20,6 +22,16 @@ const authReducer = (state, { type, user }) => {
         ...state,
         token: false,
         user,
+      };
+    case 'SIGNUP':
+      const newUserList = [...state.userList, user];
+      localStorage.setItem(
+        'registeredUserList',
+        JSON.stringify(newUserList),
+      );
+      return {
+        ...state,
+        userList: newUserList,
       };
     default:
       return state;
