@@ -6,7 +6,6 @@ import Feeds from '../components/feed/Feeds';
 import Axios from 'axios';
 
 const Home = () => {
-  const { token } = useUserState();
   const [feeds, setFeeds] = useState();
   const path = `${process.env.PUBLIC_URL}/data/feedData.json`;
 
@@ -23,16 +22,12 @@ const Home = () => {
     fetchData();
   }, []);
 
-  // TODO: Routes 폴더에서 라우팅 처리해주기
   return (
-    <>
-      {!token && <Navigate to="/login" replace={true} />}
-      <Layout>
-        <div className="main">
-          <Feeds data={feeds} />
-        </div>
-      </Layout>
-    </>
+    <Layout>
+      <div className="main">
+        <Feeds data={feeds} />
+      </div>
+    </Layout>
   );
 };
 
