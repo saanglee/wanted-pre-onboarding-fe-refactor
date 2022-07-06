@@ -32,9 +32,12 @@ const Header = () => {
   React.useEffect(() => {
     documentRef.current.addEventListener('scroll', throttleScroll);
     return () =>
-      documentRef.current.removeEventListener('scroll', throttleScroll);
+      documentRef.current.removeEventListener(
+        'scroll',
+        throttleScroll,
+      );
   }, [pageY]);
-  
+
   return (
     <header className={hide ? 'hide header' : 'header'}>
       <div className="inner">
@@ -57,7 +60,9 @@ const Header = () => {
           </div>
           <nav className="gnb">
             <ul>
-              <li>{user && <span>{user}님 안녕하세요!</span>}</li>
+              <li className="user">
+                {user && <span>{user}님 안녕하세요!</span>}
+              </li>
               <li>
                 <Link to="/">
                   <AiOutlineHome />
