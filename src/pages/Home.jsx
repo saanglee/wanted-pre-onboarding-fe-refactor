@@ -6,7 +6,6 @@ import Feeds from '../components/feed/Feeds';
 import Axios from 'axios';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 
-
 const Home = () => {
   const [feeds, setFeeds] = useState();
   const path = `${process.env.PUBLIC_URL}/data/feedData.json`;
@@ -27,8 +26,8 @@ const Home = () => {
   return (
     <Layout>
       <div className="main">
-      <PullToRefresh onRefresh={() => fetchData()}>   
-        <Feeds data={feeds} />
+        <PullToRefresh onRefresh={() => fetchData()}>
+          <Feeds data={feeds} />
         </PullToRefresh>
       </div>
     </Layout>

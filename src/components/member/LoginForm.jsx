@@ -1,7 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 
-const LoginForm = () => {
+import cx from 'classnames';
+
+const LoginForm = ({ isModal }) => {
   const { loginCallback } = useAuth();
 
   const [inputs, setInputs] = useState({
@@ -14,45 +16,58 @@ const LoginForm = () => {
   const inputEmail = useRef();
   const inputPw = useRef();
 
-  //이메일, 비밀번호 유효성 검사 상태 저장
-  const [statusId, setStatusId] = useState(true);
-  const [statusEmail, setStatusEmail] = useState(true);
-  const [statusPw, setStatusPw] = useState(true);
+  const [validName, setValidName] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
+  const [validPwd, setValidPwd] = useState(false);
+
+  const [nameFocused, setNameFocused] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
+  const [pwdFocused, setPwdFocused] = useState(false);
+
   const [statusBtn, setstatesBtn] = useState(false);
-  //비구조화 할당
+
   const { user, email, password } = inputs;
+
+  const handleEmailFocused = () => {
+    setEmailFocused(current => !current);
+  };
+
+  const handlePwdFocused = () => {
+    setPwdFocused(current => !current);
+  };
+
+  const handleNameFocused = () => {
+    setNameFocused(current => !current);
+  };
 
   //input change event
   const onChangeHandler = e => {
-    const idCurrent = inputId.current.value;
-    const emailCurrent = inputEmail.current.value;
-    const pwCurrent = inputPw.current.value;
+    const CurentName = inputId.current.value;
+    const CurrentEmail = inputEmail.current.value;
+    const CurrentPwd = inputPw.current.value;
 
-    if (idCurrent !== '') {
-      setStatusId(true);
+    if (CurentName !== '') {
+      setValidName(true);
     } else {
-      setStatusId(false);
+      setValidName(false);
     }
 
-    //이메일 유효성
     if (validationEmail(email)) {
-      setStatusEmail(true);
+      setValidEmail(true);
     } else {
-      setStatusEmail(false);
+      setValidEmail(false);
     }
 
-    //비밀번호 유효성
-    if (validationPassword(pwCurrent)) {
-      setStatusPw(true);
+    if (validationPassword(CurrentPwd)) {
+      setValidPwd(true);
     } else {
-      setStatusPw(false);
+      setValidPwd(false);
     }
 
-    //이메일 && 비밀번호 유효성 검사 - 버튼 disabled 여부
     if (
-      idCurrent !== '' &&
-      validationEmail(emailCurrent) &&
-      validationPassword(pwCurrent)
+      CurentName !== '' &&
+      validationEmail(CurrentEmail) &&
+      validationPassword(CurrentPwd)
     ) {
       setstatesBtn(true);
     } else {
@@ -85,7 +100,6 @@ const LoginForm = () => {
     return true;
   }
 
-  //비밀번호 유효성 검사 함수
   function validationPassword(v) {
     if (v === '') {
       return false;
@@ -93,7 +107,6 @@ const LoginForm = () => {
     const pwRegex =
       /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&~]{8,}/g;
 
-    //비밀번호 형식이 맞지 않을 경우
     if (!pwRegex.test(v)) {
       return false;
     }
@@ -107,25 +120,37 @@ const LoginForm = () => {
         type="text"
         name="user"
         ref={inputId}
+        onFocus={handleNameFocused}
+        onBlur={handleNameFocused}
         onChange={onChangeHandler}
         placeholder="닉네임"
-        className={(statusId ? '' : 'error') + ' w100'}
+        className={cx('w100', {
+          error: validName !== '' && !validName && nameFocused,
+        })}
       />
       <input
         type="text"
         name="email"
         ref={inputEmail}
+        onFocus={handleEmailFocused}
+        onBlur={handleEmailFocused}
         onChange={onChangeHandler}
         placeholder="이메일"
-        className={(statusEmail ? '' : 'error') + ' w100'}
+        className={cx('w100', {
+          error: validEmail !== '' && !validEmail && emailFocused,
+        })}
       />
       <input
         type="password"
         name="password"
         ref={inputPw}
+        onFocus={handlePwdFocused}
+        onBlur={handlePwdFocused}
         onChange={onChangeHandler}
         placeholder="비밀번호"
-        className={(statusPw ? '' : 'error') + ' w100'}
+        className={cx('w100', {
+          error: validPwd !== '' && !validPwd && pwdFocused,
+        })}
       />
       <button
         type="submit"
