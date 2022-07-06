@@ -6,25 +6,30 @@ import {
   AiOutlineMessage,
   AiOutlineSend,
   AiOutlinePushpin,
+  AiFillHeart,
 } from 'react-icons/ai';
 import CommentWrite from './comment/CommentWrite';
 import CommentList from './comment/CommentList';
 import LazyImg from './LazyImg';
 import Portal from '../Portal';
 
+
 const Feed = ({ feed, id, onRemove }) => {
-  // 이미지 로딩 상태
   const [loaded, setLoaded] = useState(false);
-
   const [openModal, setOpenModal] = useState(false);
-
-  // feedData.json파일 댓글
   const [comments, setComments] = useState(feed.comments);
+  const [isLike, setIsLike] = useState(false);
+  const [like, setLike] = useState(feed.like);
 
-  // 이미지 로딩 함수
   const onLoaded = () => {
     setLoaded(true);
   };
+
+
+  const onClickLike = () => {
+    setIsLike(prev => !prev);
+    if (isLike) setLike(prev => prev - 1);
+    if (!isLike) setLike(prev => prev + 1);
 
   const openClickHandler = e => {
     setOpenModal(true);
@@ -32,6 +37,7 @@ const Feed = ({ feed, id, onRemove }) => {
 
   const closeClickHandler = e => {
     setOpenModal(false);
+
   };
 
   return (
@@ -57,9 +63,23 @@ const Feed = ({ feed, id, onRemove }) => {
           <div className="feed-menu">
             <ul>
               <li>
-                <button type="button">
-                  <AiOutlineHeart />
-                </button>
+                {isLike ? (
+                  <button
+                    className="like-btn"
+                    type="button"
+                    onClick={onClickLike}
+                  >
+                    <AiFillHeart />
+                  </button>
+                ) : (
+                  <button
+                    className="unLike-btn"
+                    type="button"
+                    onClick={onClickLike}
+                  >
+                    <AiOutlineHeart />
+                  </button>
+                )}
               </li>
               <li>
                 <Link to="/">
@@ -77,11 +97,10 @@ const Feed = ({ feed, id, onRemove }) => {
             </button>
           </div>
           <div className="feed-content">
-            <strong>좋아요 {feed.like}개</strong>
+            <strong>좋아요 {like}개</strong>
 
             <p>{feed.content}</p>
           </div>
-          {/* 댓글 */}
           <CommentList
             comments={comments}
             setComments={setComments}

@@ -1,9 +1,7 @@
 const CommentList = props => {
   const deleteComment = event => {
-    console.log('event', event.target.id);
     props.comments.splice(Number(event.target.id), 1);
     props.setComments([...props.comments]);
-    console.log(props.comments);
   };
 
   return (
