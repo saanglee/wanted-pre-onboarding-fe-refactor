@@ -32,7 +32,7 @@ const Header = () => {
           </div>
           <nav className="gnb">
             <ul>
-              <li>{user && <span>닉네임: {user}</span>}</li>
+              <li>{user && <span>{user}님 안녕하세요!</span>}</li>
               <li>
                 <Link to="/">
                   <AiOutlineHome />
