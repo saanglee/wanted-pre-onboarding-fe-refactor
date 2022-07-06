@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useLazyImageObserver from '../../hooks/useLazyImageObserver';
 import IMG_BASE from '../../assets/images/img_base.jpeg';
 import styled from 'styled-components';
 
-const LazyImg = ({ src, alt, onLoaed }) => {
+const LazyImg = ({ src, alt, onLoaded }) => {
   const { imageSrc, imgRef, isLoad } = useLazyImageObserver({
     src,
   });
@@ -29,13 +29,15 @@ const LazyImg = ({ src, alt, onLoaed }) => {
   );
 
 
+  const matchImg = src === imageSrc ? imageSrc : src;
+
   return (
     <>
     <ContentsWrapper ref={outerRef}>
     <img
       ref={imgRef}
-      src={isLoad ? imageSrc : IMG_BASE}
-      onLoad={onLoaed}
+      src={isLoad ? matchImg : IMG_BASE}
+      onLoad={onLoaded}
       alt={alt}
     />
     </ContentsWrapper>

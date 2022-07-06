@@ -10,10 +10,13 @@ import {
 import CommentWrite from './comment/CommentWrite';
 import CommentList from './comment/CommentList';
 import LazyImg from './LazyImg';
+import Portal from '../Portal';
 
-const Feed = ({ feed }) => {
+const Feed = ({ feed, id, onRemove }) => {
   // 이미지 로딩 상태
   const [loaded, setLoaded] = useState(false);
+
+  const [openModal, setOpenModal] = useState(false);
 
   // feedData.json파일 댓글
   const [comments, setComments] = useState(feed.comments);
@@ -23,6 +26,14 @@ const Feed = ({ feed }) => {
     setLoaded(true);
   };
 
+  const openClickHandler = e => {
+    setOpenModal(true);
+  };
+
+  const closeClickHandler = e => {
+    setOpenModal(false);
+  };
+
   return (
     <div className={'feed-item ' + (loaded && 'on')}>
       <div className="feed-info">
@@ -30,17 +41,17 @@ const Feed = ({ feed }) => {
           <span></span>
           <strong>{feed.user_id}</strong>
         </div>
-        <AiOutlineEllipsis />
+        <button type="button" onClick={openClickHandler}>
+          <AiOutlineEllipsis />
+        </button>
       </div>
-
       <div className="feed-img">
         <LazyImg
           src={feed.img}
           alt="피드 이미지"
-          onLoaed={onLoaded}
+          onLoaded={onLoaded}
         />
       </div>
-
       <>
         <div className="feed-utils">
           <div className="feed-menu">
@@ -79,6 +90,30 @@ const Feed = ({ feed }) => {
         </div>
         <CommentWrite setComments={setComments} comments={comments} />
       </>
+
+      {openModal && (
+        <Portal>
+          <div className="modal-container">
+            <div className="modal-body modal-list">
+              <ul>
+                <li>
+                  <button type="button" onClick={() => onRemove(id)}>
+                    삭제
+                  </button>
+                </li>
+                <li>
+                  <button type="button">수정</button>
+                </li>
+                <li>
+                  <button type="button" onClick={closeClickHandler}>
+                    취소
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </Portal>
+      )}
     </div>
   );
 };
