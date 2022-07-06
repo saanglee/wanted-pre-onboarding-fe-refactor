@@ -110,6 +110,8 @@
 
 [프리온보딩 #1 - 선별과제 리팩토링 - 댓글 삭제 구현](https://velog.io/@eeeve/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-1-%EB%8C%93%EA%B8%80-%EC%82%AD%EC%A0%9C-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
 
+![delete-comment](https://user-images.githubusercontent.com/92660097/177489077-f7b4912b-9bf0-41eb-a616-7c5c903a87bb.gif)
+
 #### 좋아요 기능 구현
 
 [프리온보딩 #1 - 선별과제 리팩토링 - 좋아요 기능 구현](https://velog.io/@eeeve/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-1-%EC%A2%8B%EC%95%84%EC%9A%94-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
@@ -118,6 +120,10 @@
 </br>
 
 ## 상지
+
+#### 로그인 폼 유효성 border 수정
+
+![loginform](https://user-images.githubusercontent.com/92660097/177489200-965aba8b-7685-4c85-9225-14090fa761b2.gif)
 
 </br>
 </br>
@@ -128,6 +134,10 @@
 2. 각 feed에 image accordion
 3. fetched Data에 random shuffle 추가
 4. Pull to refresh 구현
+
+- 해당 Issue : https://github.com/Wanted-Pre-Onboarding-Frontend-2/wanted-pre-onboarding-fe-refactor/issues/22
+
+- 해당 Pull Request : https://github.com/Wanted-Pre-Onboarding-Frontend-2/wanted-pre-onboarding-fe-refactor/pull/24
 
 </br>
 </br>
